@@ -1,0 +1,139 @@
+{
+  "name": "tiny",
+  "vertices": [
+    {
+      "id": 0,
+      "x": 0,
+      "y": 0,
+      "type": "Start",
+      "checkpointOrder": null,
+      "active": true
+    },
+    {
+      "id": 1,
+      "x": 10,
+      "y": 0,
+      "type": "Checkpoint",
+      "checkpointOrder": 1,
+      "active": true
+    },
+    {
+      "id": 2,
+      "x": 20,
+      "y": 0,
+      "type": "Intersection",
+      "checkpointOrder": null,
+      "active": true
+    },
+    {
+      "id": 3,
+      "x": 30,
+      "y": 0,
+      "type": "Finish",
+      "checkpointOrder": null,
+      "active": true
+    },
+    {
+      "id": 4,
+      "x": 10,
+      "y": 10,
+      "type": "DeadEnd",
+      "checkpointOrder": null,
+      "active": true
+    },
+    {
+      "id": 5,
+      "x": 20,
+      "y": 10,
+      "type": "FuelStation",
+      "checkpointOrder": null,
+      "active": true
+    }
+  ],
+  "edges": [
+    {
+      "id": 0,
+      "from": 0,
+      "to": 1,
+      "distance": 10,
+      "baseTime": 10,
+      "fuelCost": 5,
+      "difficulty": 1,
+      "status": "Open",
+      "isShortcut": false,
+      "directed": false
+    },
+    {
+      "id": 1,
+      "from": 1,
+      "to": 2,
+      "distance": 10,
+      "baseTime": 10,
+      "fuelCost": 5,
+      "difficulty": 1,
+      "status": "Open",
+      "isShortcut": false,
+      "directed": false
+    },
+    {
+      "id": 2,
+      "from": 2,
+      "to": 3,
+      "distance": 10,
+      "baseTime": 10,
+      "fuelCost": 5,
+      "difficulty": 1,
+      "status": "Open",
+      "isShortcut": false,
+      "directed": false
+    },
+    {
+      "id": 3,
+      "from": 0,
+      "to": 3,
+      "distance": 40,
+      "baseTime": 20,
+      "fuelCost": 8,
+      "difficulty": 3,
+      "status": "Open",
+      "isShortcut": true,
+      "directed": true
+    },
+    {
+      "id": 4,
+      "from": 1,
+      "to": 4,
+      "distance": 10,
+      "baseTime": 10,
+      "fuelCost": 5,
+      "difficulty": 2,
+      "status": "Open",
+      "isShortcut": false,
+      "directed": false
+    },
+    {
+      "id": 5,
+      "from": 2,
+      "to": 5,
+      "distance": 10,
+      "baseTime": 10,
+      "fuelCost": 5,
+      "difficulty": 1,
+      "status": "Open",
+      "isShortcut": false,
+      "directed": false
+    },
+    {
+      "id": 6,
+      "from": 1,
+      "to": 2,
+      "distance": 15,
+      "baseTime": 8,
+      "fuelCost": 6,
+      "difficulty": 4,
+      "status": "Open",
+      "isShortcut": false,
+      "directed": false
+    }
+  ]
+}
