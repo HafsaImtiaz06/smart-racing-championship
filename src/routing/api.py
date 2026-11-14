@@ -3,16 +3,7 @@ All functions use Graph.neighbors() and Graph.edge_cost() only. Return PathResul
 from ..core.graph import Graph
 from ..core.results import PathResult, RoutePlan
 from ..core import constants as K
-
-
-def bfs_path(g: Graph, source: int, target: int) -> PathResult:
-    """Min-edge-count path. found=False if unreachable. Fill expanded/relaxed counters."""
-    raise NotImplementedError
-
-
-def reachable_from(g: Graph, source: int) -> set:
-    """Set of vertex ids reachable from source via traversable edges (BFS)."""
-    raise NotImplementedError
+from .bfs import bfs_path, reachable_from   # implemented in bfs.py
 
 
 def dfs_analysis(g: Graph, source: int) -> dict:
