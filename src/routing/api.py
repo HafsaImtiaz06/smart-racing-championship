@@ -4,6 +4,7 @@ from ..core.graph import Graph
 from ..core.results import PathResult, RoutePlan
 from ..core import constants as K
 from .bfs import bfs_path, reachable_from   # implemented in bfs.py
+from .dijkstra import dijkstra               # implemented in dijkstra.py
 
 
 def dfs_analysis(g: Graph, source: int) -> dict:
@@ -13,10 +14,6 @@ def dfs_analysis(g: Graph, source: int) -> dict:
 
 def alternative_routes(g: Graph, source: int, target: int, max_routes: int = 20, max_len: int = 40) -> list:
     """Bounded simple-path enumeration (documented limits). Returns list of vertex-id lists."""
-    raise NotImplementedError
-
-
-def dijkstra(g: Graph, source: int, target: int, preset: str = K.DEFAULT_PRESET) -> PathResult:
     raise NotImplementedError
 
 
