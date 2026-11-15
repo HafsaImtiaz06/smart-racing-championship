@@ -15,8 +15,9 @@ def dfs_analysis(g, source):
                    pair count; a loop road (from == to) counts.
       'components' connected components of the whole graph (all roads treated as two-way), blocked roads removed.
                    Each component is a sorted id list; components are ordered by smallest id.
-      'dead_ends'  sorted ids of vertices (other than Start/Finish) where you cannot continue after arriving:
-                   they have exactly one traversable road, or no road leaving them."""
+      'dead_ends'  sorted ids of dead ends (spec 5.1): non-mandatory vertices (not a checkpoint, not Start/Finish) from
+                   which the Finish cannot be reached without reversing, whichever road you arrive by. 'Reversing'
+                   means turning straight back over the road you just used; going round a loop and out again is fine."""
     order = []
     if source in g.vertices:
         visited = {source}
@@ -146,18 +147,34 @@ def _components(g):
 
 
 def _dead_ends(g):
-    incident = {v: 0 for v in g.vertices}
+    """Dead ends per the spec: a non-mandatory vertex from which the Finish cannot be reached without reversing.
+    Search state = (road used to arrive, direction). From an arrival you may leave by any traversable road EXCEPT the
+    one you arrived by. A vertex is a dead end if it can be arrived at, yet no arrival at it can still reach the Finish."""
+    finishes = {vid for vid, v in g.vertices.items() if v.type == VertexType.FINISH}
+    arcs = []                                        # (edge id, tail, head)
     for e in g.edges.values():
-        if e.status != EdgeStatus.BLOCKED:
-            incident[e.from_] += 1
-            if e.to != e.from_:
-                incident[e.to] += 1
+        if e.status == EdgeStatus.BLOCKED or e.from_ == e.to:
+            continue
+        arcs.append((e.id, e.from_, e.to))
+        if not e.directed:
+            arcs.append((e.id, e.to, e.from_))
+    into = {}                                        # head vertex -> arcs arriving there
+    for arc in arcs:
+        into.setdefault(arc[2], []).append(arc)
+    good = {arc for arc in arcs if arc[2] in finishes}           # arriving at the Finish counts as reaching it
+    queue = list(good)
+    while queue:
+        eid, tail, _ = queue.pop()
+        for prev in into.get(tail, []):
+            if prev[0] != eid and prev not in good:             # you may not turn straight back over the same road
+                good.add(prev)
+                queue.append(prev)
     out = []
     for vid, v in g.vertices.items():
-        if v.type in (VertexType.START, VertexType.FINISH):
+        if v.type in (VertexType.START, VertexType.FINISH) or v.checkpointOrder is not None:
             continue
-        exits = len(g.neighbors(vid))
-        if incident[vid] >= 1 and (incident[vid] == 1 or exits == 0):
+        arrivals = into.get(vid, [])
+        if arrivals and not any(a in good for a in arrivals):
             out.append(vid)
     return sorted(out)
 
