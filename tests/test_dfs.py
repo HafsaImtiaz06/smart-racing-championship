@@ -96,9 +96,28 @@ class DfsTests(unittest.TestCase):
         self.assertEqual(dfs_analysis(self.g, 0)["order"], [0])
 
     def test_dead_ends(self):
-        self.assertEqual(dfs_analysis(self.g, 0)["dead_ends"], [4, 5])   # Start and Finish never listed
+        self.assertEqual(dfs_analysis(self.g, 0)["dead_ends"], [4, 5])   # leaves; Start/Finish/checkpoints never listed
         self.g.block_edge(4)                                             # 4 now has no road at all (isolated)
         self.assertNotIn(4, dfs_analysis(self.g, 0)["dead_ends"])
+
+    def test_dead_ends_depend_on_current_roads(self):
+        self.g.block_edge(2)
+        self.g.block_edge(3)                                             # Finish cut off: nowhere leads to it
+        self.assertEqual(dfs_analysis(self.g, 0)["dead_ends"], [2, 4, 5])
+
+    def test_loop_off_a_junction_is_not_a_dead_end_but_a_spur_inside_it_is(self):
+        g = Graph("lollipop")
+        pts = [(0, 0), (10, 0), (20, 0), (30, 10), (30, -10), (50, 10)]   # S, J, F, a, b, c
+        types = [VertexType.START, VertexType.INTERSECTION, VertexType.FINISH,
+                 VertexType.INTERSECTION, VertexType.INTERSECTION, VertexType.INTERSECTION]
+        for i, ((x, y), t) in enumerate(zip(pts, types)):
+            g.add_vertex(Vertex(i, x, y, t))
+        roads = [(0, 1), (1, 2), (1, 3), (3, 4), (4, 1), (3, 5)]          # triangle J-a-b off J, spur c off a
+        for k, (a, b) in enumerate(roads):
+            g.add_edge(Edge(k, a, b, 100.0, 10.0, 5.0, 1))
+        g.finalize()
+        # a and b can circle the triangle and leave through J, so only the spur end c is a dead end
+        self.assertEqual(dfs_analysis(g, 0)["dead_ends"], [5])
 
     def test_unknown_source(self):
         r = dfs_analysis(self.g, 99)
