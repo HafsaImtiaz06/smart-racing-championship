@@ -2,7 +2,7 @@ import importlib.util, os, random, sys, unittest
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, "experiments"))
-import common
+import common  # type: ignore
 from src.routing.api import reachable_from
 
 
