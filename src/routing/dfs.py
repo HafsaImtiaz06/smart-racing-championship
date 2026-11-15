@@ -15,10 +15,20 @@ def dfs_analysis(g, source):
                    pair count; a loop road (from == to) counts.
       'components' connected components of the whole graph (all roads treated as two-way), blocked roads removed.
                    Each component is a sorted id list; components are ordered by smallest id.
+      'visited' / 'examined'  counters of the DFS traversal: vertices visited and roads looked at.
       'dead_ends'  sorted ids of dead ends (spec 5.1): non-mandatory vertices (not a checkpoint, not Start/Finish) from
                    which the Finish cannot be reached without reversing, whichever road you arrive by. 'Reversing'
                    means turning straight back over the road you just used; going round a loop and out again is fine."""
-    order = []
+    order, examined = dfs_order(g, source)
+    return {"order": order, "has_cycle": _has_cycle(g, set(order)),
+            "components": _components(g), "dead_ends": _dead_ends(g),
+            "visited": len(order), "examined": examined}
+
+
+def dfs_order(g, source):
+    """DFS preorder traversal from source (neighbours in ascending id), iterative.
+    Returns (order, examined): examined = number of roads looked at (sum of out-degrees of visited vertices)."""
+    order, examined = [], 0
     if source in g.vertices:
         visited = {source}
         order.append(source)
@@ -26,6 +36,7 @@ def dfs_analysis(g, source):
         while stack:
             advanced = False
             for nb, _ in stack[-1]:
+                examined += 1
                 if nb not in visited:
                     visited.add(nb)
                     order.append(nb)
@@ -34,8 +45,7 @@ def dfs_analysis(g, source):
                     break
             if not advanced:
                 stack.pop()
-    return {"order": order, "has_cycle": _has_cycle(g, set(order)),
-            "components": _components(g), "dead_ends": _dead_ends(g)}
+    return order, examined
 
 
 def _has_cycle(g, reach):

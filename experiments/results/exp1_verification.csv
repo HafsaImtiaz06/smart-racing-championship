@@ -1,0 +1,73 @@
+graph,check,passed,total
+grid_k10_sparse_seed1,BFS minimum edge count vs reference BFS,25,25
+grid_k10_sparse_seed1,DFS components vs union-find (8% roads blocked),1,1
+grid_k10_sparse_seed1,DFS cycle flag vs (edges >= vertices) in the source component,1,1
+grid_k10_sparse_seed1,DFS visited = size of source component,1,1
+grid_k10_medium_seed1,BFS minimum edge count vs reference BFS,25,25
+grid_k10_medium_seed1,DFS components vs union-find (8% roads blocked),1,1
+grid_k10_medium_seed1,DFS cycle flag vs (edges >= vertices) in the source component,1,1
+grid_k10_medium_seed1,DFS visited = size of source component,1,1
+grid_k10_dense_seed1,BFS minimum edge count vs reference BFS,25,25
+grid_k10_dense_seed1,DFS components vs union-find (8% roads blocked),1,1
+grid_k10_dense_seed1,DFS cycle flag vs (edges >= vertices) in the source component,1,1
+grid_k10_dense_seed1,DFS visited = size of source component,1,1
+grid_k16_sparse_seed1,BFS minimum edge count vs reference BFS,25,25
+grid_k16_sparse_seed1,DFS components vs union-find (8% roads blocked),1,1
+grid_k16_sparse_seed1,DFS cycle flag vs (edges >= vertices) in the source component,1,1
+grid_k16_sparse_seed1,DFS visited = size of source component,1,1
+grid_k16_medium_seed1,BFS minimum edge count vs reference BFS,25,25
+grid_k16_medium_seed1,DFS components vs union-find (8% roads blocked),1,1
+grid_k16_medium_seed1,DFS cycle flag vs (edges >= vertices) in the source component,1,1
+grid_k16_medium_seed1,DFS visited = size of source component,1,1
+grid_k16_dense_seed1,BFS minimum edge count vs reference BFS,25,25
+grid_k16_dense_seed1,DFS components vs union-find (8% roads blocked),1,1
+grid_k16_dense_seed1,DFS cycle flag vs (edges >= vertices) in the source component,1,1
+grid_k16_dense_seed1,DFS visited = size of source component,1,1
+grid_k24_sparse_seed1,BFS minimum edge count vs reference BFS,25,25
+grid_k24_sparse_seed1,DFS components vs union-find (8% roads blocked),1,1
+grid_k24_sparse_seed1,DFS cycle flag vs (edges >= vertices) in the source component,1,1
+grid_k24_sparse_seed1,DFS visited = size of source component,1,1
+grid_k24_medium_seed1,BFS minimum edge count vs reference BFS,25,25
+grid_k24_medium_seed1,DFS components vs union-find (8% roads blocked),1,1
+grid_k24_medium_seed1,DFS cycle flag vs (edges >= vertices) in the source component,1,1
+grid_k24_medium_seed1,DFS visited = size of source component,1,1
+grid_k24_dense_seed1,BFS minimum edge count vs reference BFS,25,25
+grid_k24_dense_seed1,DFS components vs union-find (8% roads blocked),1,1
+grid_k24_dense_seed1,DFS cycle flag vs (edges >= vertices) in the source component,1,1
+grid_k24_dense_seed1,DFS visited = size of source component,1,1
+grid_k32_sparse_seed1,BFS minimum edge count vs reference BFS,25,25
+grid_k32_sparse_seed1,DFS components vs union-find (8% roads blocked),1,1
+grid_k32_sparse_seed1,DFS cycle flag vs (edges >= vertices) in the source component,1,1
+grid_k32_sparse_seed1,DFS visited = size of source component,1,1
+grid_k32_medium_seed1,BFS minimum edge count vs reference BFS,25,25
+grid_k32_medium_seed1,DFS components vs union-find (8% roads blocked),1,1
+grid_k32_medium_seed1,DFS cycle flag vs (edges >= vertices) in the source component,1,1
+grid_k32_medium_seed1,DFS visited = size of source component,1,1
+grid_k32_dense_seed1,BFS minimum edge count vs reference BFS,25,25
+grid_k32_dense_seed1,DFS components vs union-find (8% roads blocked),1,1
+grid_k32_dense_seed1,DFS cycle flag vs (edges >= vertices) in the source component,1,1
+grid_k32_dense_seed1,DFS visited = size of source component,1,1
+grid_k40_sparse_seed1,BFS minimum edge count vs reference BFS,25,25
+grid_k40_sparse_seed1,DFS components vs union-find (8% roads blocked),1,1
+grid_k40_sparse_seed1,DFS cycle flag vs (edges >= vertices) in the source component,1,1
+grid_k40_sparse_seed1,DFS visited = size of source component,1,1
+grid_k40_medium_seed1,BFS minimum edge count vs reference BFS,25,25
+grid_k40_medium_seed1,DFS components vs union-find (8% roads blocked),1,1
+grid_k40_medium_seed1,DFS cycle flag vs (edges >= vertices) in the source component,1,1
+grid_k40_medium_seed1,DFS visited = size of source component,1,1
+grid_k40_dense_seed1,BFS minimum edge count vs reference BFS,25,25
+grid_k40_dense_seed1,DFS components vs union-find (8% roads blocked),1,1
+grid_k40_dense_seed1,DFS cycle flag vs (edges >= vertices) in the source component,1,1
+grid_k40_dense_seed1,DFS visited = size of source component,1,1
+grid_k56_sparse_seed1,BFS minimum edge count vs reference BFS,25,25
+grid_k56_sparse_seed1,DFS components vs union-find (8% roads blocked),1,1
+grid_k56_sparse_seed1,DFS cycle flag vs (edges >= vertices) in the source component,1,1
+grid_k56_sparse_seed1,DFS visited = size of source component,1,1
+grid_k56_medium_seed1,BFS minimum edge count vs reference BFS,25,25
+grid_k56_medium_seed1,DFS components vs union-find (8% roads blocked),1,1
+grid_k56_medium_seed1,DFS cycle flag vs (edges >= vertices) in the source component,1,1
+grid_k56_medium_seed1,DFS visited = size of source component,1,1
+grid_k56_dense_seed1,BFS minimum edge count vs reference BFS,25,25
+grid_k56_dense_seed1,DFS components vs union-find (8% roads blocked),1,1
+grid_k56_dense_seed1,DFS cycle flag vs (edges >= vertices) in the source component,1,1
+grid_k56_dense_seed1,DFS visited = size of source component,1,1

@@ -3,7 +3,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from src.core.graph import Graph
 from src.core.models import Vertex, Edge, VertexType, EdgeStatus
 from src.core.track_io import load_track
-from src.routing.api import (dfs_analysis, alternative_routes, path_cost, reachable_from, dijkstra)
+from src.routing.api import (dfs_analysis, dfs_order, alternative_routes, path_cost, reachable_from, dijkstra)
 
 TINY = os.path.join(os.path.dirname(__file__), "data", "tiny.json")
 
@@ -47,6 +47,14 @@ class DfsTests(unittest.TestCase):
         self.assertEqual(sorted(r["order"]), sorted(reachable_from(self.g, 0)))
         self.assertEqual(len(r["order"]), len(set(r["order"])))
         self.assertEqual(r["order"], [0, 1, 2, 3, 5, 4])
+
+    def test_dfs_order_counters(self):
+        order, examined = dfs_order(self.g, 0)
+        self.assertEqual(order, dfs_analysis(self.g, 0)["order"])
+        self.assertEqual(examined, sum(len(self.g.neighbors(v)) for v in order))
+        r = dfs_analysis(self.g, 0)
+        self.assertEqual((r["visited"], r["examined"]), (len(order), examined))
+        self.assertEqual(dfs_order(self.g, 99), ([], 0))
 
     def test_order_deterministic(self):
         self.assertEqual(dfs_analysis(self.g, 0)["order"], dfs_analysis(self.g, 0)["order"])

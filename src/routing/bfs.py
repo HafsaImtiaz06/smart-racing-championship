@@ -37,15 +37,23 @@ def bfs_path(g, source, target):
                       runtime_s=time.perf_counter() - t0)
 
 
-def reachable_from(g, source):
-    """Set of vertex ids reachable from source through traversable edges."""
+def bfs_order(g, source):
+    """Full BFS traversal from source over traversable roads. Returns (order, examined):
+    order = vertices in the order they are dequeued, examined = number of roads looked at (sum of out-degrees)."""
     if source not in g.vertices:
-        return set()
-    seen, queue = {source}, deque([source])
+        return [], 0
+    seen, queue, order, examined = {source}, deque([source]), [], 0
     while queue:
         u = queue.popleft()
+        order.append(u)
         for _, v in g.neighbors(u):
+            examined += 1
             if v not in seen:
                 seen.add(v)
                 queue.append(v)
-    return seen
+    return order, examined
+
+
+def reachable_from(g, source):
+    """Set of vertex ids reachable from source through traversable edges."""
+    return set(bfs_order(g, source)[0])
