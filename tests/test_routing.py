@@ -1,7 +1,7 @@
 import os, sys, unittest
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from src.core.track_io import load_track
-from src.routing.api import bfs_path, reachable_from
+from src.routing.api import bfs_path, reachable_from, bfs_order
 
 TINY = os.path.join(os.path.dirname(__file__), "data", "tiny.json")
 
@@ -34,6 +34,13 @@ class BfsTests(unittest.TestCase):
         r = bfs_path(self.g, 2, 2)
         self.assertTrue(r.found)
         self.assertEqual(r.vertices, [2])
+
+    def test_bfs_order_counters(self):
+        order, examined = bfs_order(self.g, 0)
+        self.assertEqual(order[0], 0)
+        self.assertEqual(sorted(order), sorted(reachable_from(self.g, 0)))
+        self.assertEqual(examined, sum(len(self.g.neighbors(v)) for v in order))
+        self.assertEqual(bfs_order(self.g, 99), ([], 0))
 
 
 if __name__ == "__main__":
