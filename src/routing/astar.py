@@ -5,11 +5,12 @@ from ..core import constants as K
 from .common import build_result
 
 
-def astar(g, source, target, preset=K.DEFAULT_PRESET):
+def astar(g, source, target, preset=K.DEFAULT_PRESET, trace=None):
     """A* with h(v) = g.heuristic_ratio(preset) * g.euclid(v, target).
     The heuristic is admissible and consistent when every edge distance >= straight-line distance
     (Graph.validate_geometry() == []), because effects and restrictions only ever raise edge costs.
-    Same counters as Dijkstra: expanded, relaxed, heap_ops."""
+    Same counters as Dijkstra: expanded, relaxed, heap_ops.
+    trace (optional, for the Algorithm Lab): same events as dijkstra. The result never depends on trace."""
     t0 = time.perf_counter()
     if source not in g.vertices or target not in g.vertices:
         return PathResult(found=False)
@@ -32,6 +33,9 @@ def astar(g, source, target, preset=K.DEFAULT_PRESET):
             continue
         done.add(u)
         expanded += 1
+        gu = best_g[u]
+        if trace is not None:
+            trace(("expand", u, gu))
         if u == target:
             verts, edges, cur = [u], [], u
             while parent[cur] is not None:
@@ -44,13 +48,17 @@ def astar(g, source, target, preset=K.DEFAULT_PRESET):
             return build_result(g, verts, edges, preset=preset, expanded=expanded,
                                 relaxed=relaxed, heap_ops=heap_ops,
                                 runtime_s=time.perf_counter() - t0)
-        gu = best_g[u]
         for e, v in g.neighbors(u):
             relaxed += 1
             if v in done:
+                if trace is not None:
+                    trace(("relax", u, v, e.id, False))
                 continue
             ng = gu + g.edge_cost(e, preset)
-            if ng < best_g.get(v, float("inf")):
+            better = ng < best_g.get(v, float("inf"))
+            if trace is not None:
+                trace(("relax", u, v, e.id, better))
+            if better:
                 best_g[v] = ng
                 parent[v] = (u, e.id)
                 counter += 1
