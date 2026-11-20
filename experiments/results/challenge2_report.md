@@ -1,6 +1,6 @@
 # Challenge 2 - Multi-objective route planning (draft sheet, auto-generated)
 
-Circuit: Circuit 1 - Coastal Loop. Lap = Start -> checkpoints 1..10 in order -> Finish. Date: 2026-11-20 15:40 | Python 3.13.15 (CPython) | OS: Windows-11-10.0.26300-SP0 | CPU: Intel64 Family 6 Model 142 Stepping 12, GenuineIntel, AMD64, 8 logical cores
+Circuit: Circuit 1 - Coastal Loop. Lap = Start -> checkpoints 1..10 in order -> Finish. Date: 2026-11-20 15:43 | Python 3.13.15 (CPython) | OS: Windows-11-10.0.26300-SP0 | CPU: Intel64 Family 6 Model 142 Stepping 12, GenuineIntel, AMD64, 8 logical cores
 
 ## 1. What each preset chooses (whole lap)
 | preset | roads | distance | time s | fuel | cost (own preset) |
