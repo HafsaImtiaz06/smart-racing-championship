@@ -4,8 +4,10 @@ from ..core.results import PathResult
 from .common import build_result
 
 
-def bfs_path(g, source, target):
-    """Min-edge-count path from source to target. found=False if unreachable."""
+def bfs_path(g, source, target, trace=None):
+    """Min-edge-count path from source to target. found=False if unreachable.
+    trace: optional callback for the Algorithm Lab. Called as trace(("expand", u)) when u is dequeued and
+    trace(("relax", u, v, edge_id, discovered)) for every road examined. The result never depends on trace."""
     t0 = time.perf_counter()
     if source not in g.vertices or target not in g.vertices:
         return PathResult(found=False)
@@ -17,8 +19,12 @@ def bfs_path(g, source, target):
     while queue:
         u = queue.popleft()
         expanded += 1
+        if trace is not None:
+            trace(("expand", u))
         for e, v in g.neighbors(u):
             relaxed += 1
+            if trace is not None:
+                trace(("relax", u, v, e.id, v not in parent))
             if v not in parent:
                 parent[v] = (u, e.id)
                 if v == target:

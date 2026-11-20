@@ -25,22 +25,31 @@ def dfs_analysis(g, source):
             "visited": len(order), "examined": examined}
 
 
-def dfs_order(g, source):
+def dfs_order(g, source, trace=None):
     """DFS preorder traversal from source (neighbours in ascending id), iterative.
-    Returns (order, examined): examined = number of roads looked at (sum of out-degrees of visited vertices)."""
+    Returns (order, examined): examined = number of roads looked at (sum of out-degrees of visited vertices).
+    trace (optional, for the Algorithm Lab): trace(("expand", u)) when u is first visited and
+    trace(("relax", u, v, edge_id, discovered)) for every road examined. The result never depends on trace."""
     order, examined = [], 0
     if source in g.vertices:
         visited = {source}
         order.append(source)
-        stack = [iter(_neighbors_sorted(g, source))]
+        if trace is not None:
+            trace(("expand", source))
+        stack = [(source, iter(_neighbors_sorted(g, source)))]
         while stack:
             advanced = False
-            for nb, _ in stack[-1]:
+            u, it = stack[-1]
+            for nb, e in it:
                 examined += 1
+                if trace is not None:
+                    trace(("relax", u, nb, e.id, nb not in visited))
                 if nb not in visited:
                     visited.add(nb)
                     order.append(nb)
-                    stack.append(iter(_neighbors_sorted(g, nb)))
+                    if trace is not None:
+                        trace(("expand", nb))
+                    stack.append((nb, iter(_neighbors_sorted(g, nb))))
                     advanced = True
                     break
             if not advanced:

@@ -5,8 +5,10 @@ from ..core import constants as K
 from .common import build_result
 
 
-def dijkstra(g, source, target, preset=K.DEFAULT_PRESET):
+def dijkstra(g, source, target, preset=K.DEFAULT_PRESET, trace=None):
     """Least-cost path using Graph.edge_cost(e, preset). found=False if unreachable.
+    trace (optional, for the Algorithm Lab): trace(("expand", u, cost_so_far)) when u is settled and
+    trace(("relax", u, v, edge_id, improved)) for every road examined. The result never depends on trace.
     Counters: expanded = vertices popped and settled, relaxed = edges examined, heap_ops = pushes + pops."""
     t0 = time.perf_counter()
     if source not in g.vertices or target not in g.vertices:
@@ -25,6 +27,8 @@ def dijkstra(g, source, target, preset=K.DEFAULT_PRESET):
             continue
         done.add(u)
         expanded += 1
+        if trace is not None:
+            trace(("expand", u, d))
         if u == target:
             verts, edges, cur = [u], [], u
             while parent[cur] is not None:
@@ -40,9 +44,14 @@ def dijkstra(g, source, target, preset=K.DEFAULT_PRESET):
         for e, v in g.neighbors(u):
             relaxed += 1
             if v in done:
+                if trace is not None:
+                    trace(("relax", u, v, e.id, False))
                 continue
             nd = d + g.edge_cost(e, preset)
-            if nd < dist.get(v, float("inf")):
+            better = nd < dist.get(v, float("inf"))
+            if trace is not None:
+                trace(("relax", u, v, e.id, better))
+            if better:
                 dist[v] = nd
                 parent[v] = (u, e.id)
                 counter += 1
