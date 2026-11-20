@@ -127,6 +127,15 @@ class DfsTests(unittest.TestCase):
         # a and b can circle the triangle and leave through J, so only the spur end c is a dead end
         self.assertEqual(dfs_analysis(g, 0)["dead_ends"], [5])
 
+    def test_graph_without_finish_has_no_dead_ends(self):
+        g = Graph("nofinish")
+        for i in range(3):
+            g.add_vertex(Vertex(i, i * 10.0, 0.0, VertexType.INTERSECTION))
+        g.add_edge(Edge(0, 0, 1, 10.0, 10.0, 5.0, 1))
+        g.add_edge(Edge(1, 1, 2, 10.0, 10.0, 5.0, 1))
+        g.finalize()
+        self.assertEqual(dfs_analysis(g, 0)["dead_ends"], [])
+
     def test_unknown_source(self):
         r = dfs_analysis(self.g, 99)
         self.assertEqual(r["order"], [])

@@ -170,6 +170,8 @@ def _dead_ends(g):
     Search state = (road used to arrive, direction). From an arrival you may leave by any traversable road EXCEPT the
     one you arrived by. A vertex is a dead end if it can be arrived at, yet no arrival at it can still reach the Finish."""
     finishes = {vid for vid, v in g.vertices.items() if v.type == VertexType.FINISH}
+    if not finishes:                                 # no Finish vertex: 'cannot reach the Finish' has no meaning
+        return []
     arcs = []                                        # (edge id, tail, head)
     for e in g.edges.values():
         if e.status == EdgeStatus.BLOCKED or e.from_ == e.to:

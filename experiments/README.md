@@ -25,3 +25,12 @@ own numbers (the sheets list the questions to answer), then copy the sheets into
 (O(V+E), O((V+E) log V)) separate from measured runtime, and do not infer a complexity class from a single timing.
 
 Exp 2 also picks up every `tracks/circuit*.json`, so rerun it after Person B and Person C add their circuits.
+
+## Challenge 2 (multi-objective route planning)
+
+    python experiments/challenge2_presets.py            (add --quick for a fast check)
+
+Writes `challenge2_*.csv`, `challenge2_weights.png` and a draft sheet `challenge2_report.md` with: what each preset chooses
+on a whole lap, the cost of every preset's route under every other preset's weights, a weight sweep, a Pareto analysis of one
+leg (complete enumeration of its simple routes) and the effect of the normalization constant. Write the explanation of the
+limitations of one weighted scalar cost yourself from these tables (the sheet lists the points to cover).
