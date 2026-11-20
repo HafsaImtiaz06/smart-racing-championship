@@ -1,0 +1,7 @@
+quantity,value
+leg,2 -> 4
+"simple routes enumerated (complete, max 12 roads)",201
+Pareto-optimal routes (5 objectives),3
+Pareto routes chosen by some sampled weights,2
+Pareto routes never chosen by any sampled weights,1
+distinct routes chosen by the 4 presets,2

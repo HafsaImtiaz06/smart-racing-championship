@@ -1,0 +1,6 @@
+T_ref multiplier,roads,distance,time_s,fuel,route
+0.25,17,2654.7,57.5,172.5,route A
+0.5,17,2626.0,66.8,160.6,route B
+1.0,17,2626.6,75.5,152.7,route C
+2.0,17,2626.6,75.5,152.7,route C
+4.0,17,2626.6,75.5,152.7,route C

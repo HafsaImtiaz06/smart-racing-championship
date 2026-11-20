@@ -4,7 +4,7 @@
 Compare Dijkstra and A* on the same road networks and queries: runtime, expanded vertices, relaxed edges, heap operations and final path cost; verify equal optimal costs when the A* conditions hold; find cases where A* expands fewer, equal or more vertices.
 
 ## Environment
-Date: 2026-11-20 15:27 | Python 3.13.15 (CPython) | OS: Windows-11-10.0.26300-SP0 | CPU: Intel64 Family 6 Model 142 Stepping 12, GenuineIntel, AMD64, 8 logical cores
+Date: 2026-11-20 15:39 | Python 3.13.15 (CPython) | OS: Windows-11-10.0.26300-SP0 | CPU: Intel64 Family 6 Model 142 Stepping 12, GenuineIntel, AMD64, 8 logical cores
 
 Timing includes the heap, the distance/parent tables and building the returned path (cost, distance, time, fuel sums). It excludes graph construction, rendering and file I/O. Correctness checks run separately from the timed calls.
 
@@ -23,44 +23,44 @@ runtime (ms), expanded vertices, relaxed edges, heap operations (pushes + pops),
 ## Results (means over the queries of each graph and preset; last column = queries where A* expanded fewer/equal/more)
 | graph | preset | queries | Dij expanded | A* expanded | Dij ms | A* ms | Dij relaxed | A* relaxed | Dij heap ops | A* heap ops | A* fewer/equal/more |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| grid_k10_sparse_seed1 | Balanced | 15 | 49.333 | 40.867 | 0.639 | 0.55 | 109.8 | 91.933 | 105.4 | 89.0 | 14/1/0 |
-| grid_k10_sparse_seed1 | Speed | 15 | 49.867 | 41.4 | 0.729 | 0.668 | 111.133 | 93.067 | 106.0 | 89.6 | 14/1/0 |
-| grid_k10_medium_seed1 | Balanced | 15 | 48.8 | 28.667 | 1.079 | 0.905 | 176.2 | 103.267 | 122.6 | 81.8 | 15/0/0 |
-| grid_k10_medium_seed1 | Speed | 15 | 48.8 | 29.467 | 0.784 | 0.549 | 176.067 | 106.133 | 124.8 | 84.6 | 15/0/0 |
-| grid_k10_dense_seed1 | Balanced | 15 | 32.267 | 14.8 | 1.347 | 0.783 | 222.4 | 102.867 | 98.267 | 53.267 | 15/0/0 |
-| grid_k10_dense_seed1 | Speed | 15 | 32.733 | 15.667 | 1.893 | 1.109 | 225.2 | 109.2 | 99.667 | 56.533 | 15/0/0 |
-| grid_k16_sparse_seed1 | Balanced | 15 | 147.4 | 127.267 | 3.206 | 3.373 | 335.2 | 292.133 | 311.133 | 278.267 | 14/1/0 |
-| grid_k16_sparse_seed1 | Speed | 15 | 148.267 | 129.733 | 3.277 | 2.799 | 337.2 | 297.267 | 311.933 | 279.4 | 13/2/0 |
-| grid_k16_medium_seed1 | Balanced | 15 | 123.467 | 71.4 | 3.368 | 2.305 | 466.867 | 270.467 | 305.133 | 197.733 | 14/1/0 |
-| grid_k16_medium_seed1 | Speed | 15 | 119.467 | 70.867 | 3.029 | 2.282 | 451.667 | 268.333 | 293.6 | 193.4 | 14/1/0 |
-| grid_k16_dense_seed1 | Balanced | 15 | 113.4 | 56.4 | 5.972 | 4.32 | 839.4 | 425.733 | 349.467 | 199.933 | 15/0/0 |
-| grid_k16_dense_seed1 | Speed | 15 | 113.333 | 58.933 | 4.753 | 2.727 | 838.333 | 444.6 | 351.067 | 211.733 | 15/0/0 |
-| grid_k24_sparse_seed1 | Balanced | 15 | 290.533 | 238.4 | 4.958 | 5.995 | 675.4 | 555.133 | 615.667 | 511.533 | 15/0/0 |
-| grid_k24_sparse_seed1 | Speed | 15 | 292.867 | 244.533 | 5.104 | 4.817 | 681.467 | 570.133 | 620.333 | 526.333 | 15/0/0 |
-| grid_k24_medium_seed1 | Balanced | 15 | 309.133 | 172.4 | 11.629 | 6.772 | 1195.467 | 671.0 | 764.6 | 480.0 | 14/1/0 |
-| grid_k24_medium_seed1 | Speed | 15 | 307.467 | 177.867 | 9.385 | 6.485 | 1189.2 | 692.6 | 754.4 | 486.4 | 14/1/0 |
-| grid_k24_dense_seed1 | Balanced | 15 | 203.8 | 88.8 | 10.627 | 5.317 | 1552.6 | 682.867 | 624.133 | 315.533 | 15/0/0 |
-| grid_k24_dense_seed1 | Speed | 15 | 207.933 | 94.867 | 9.719 | 5.268 | 1583.867 | 727.2 | 647.667 | 333.067 | 15/0/0 |
-| grid_k32_sparse_seed1 | Balanced | 15 | 485.0 | 333.4 | 9.926 | 8.011 | 1132.2 | 789.867 | 1020.0 | 730.733 | 15/0/0 |
-| grid_k32_sparse_seed1 | Speed | 15 | 484.733 | 344.8 | 9.974 | 8.436 | 1131.667 | 814.933 | 1020.533 | 750.533 | 15/0/0 |
-| grid_k32_medium_seed1 | Balanced | 15 | 524.333 | 304.0 | 15.11 | 9.751 | 2042.867 | 1191.733 | 1292.533 | 849.867 | 14/1/0 |
-| grid_k32_medium_seed1 | Speed | 15 | 522.533 | 310.533 | 15.332 | 9.999 | 2036.0 | 1216.933 | 1285.0 | 860.733 | 14/1/0 |
-| grid_k32_dense_seed1 | Balanced | 15 | 478.733 | 229.0 | 25.915 | 12.62 | 3691.4 | 1791.267 | 1431.4 | 799.133 | 15/0/0 |
-| grid_k32_dense_seed1 | Speed | 15 | 475.6 | 230.667 | 27.781 | 12.881 | 3666.6 | 1805.2 | 1446.6 | 809.533 | 15/0/0 |
-| grid_k40_sparse_seed1 | Balanced | 15 | 645.867 | 517.0 | 5.82 | 5.342 | 1505.667 | 1208.933 | 1353.6 | 1108.933 | 15/0/0 |
-| grid_k40_sparse_seed1 | Speed | 15 | 645.533 | 522.2 | 6.142 | 5.508 | 1504.6 | 1220.933 | 1350.267 | 1113.8 | 15/0/0 |
-| grid_k40_medium_seed1 | Balanced | 15 | 729.733 | 449.133 | 13.915 | 10.98 | 2860.4 | 1765.333 | 1800.267 | 1235.467 | 14/1/0 |
-| grid_k40_medium_seed1 | Speed | 15 | 731.533 | 461.2 | 11.811 | 6.725 | 2867.267 | 1811.867 | 1792.6 | 1250.4 | 14/1/0 |
-| grid_k40_dense_seed1 | Balanced | 15 | 840.133 | 454.6 | 24.17 | 13.752 | 6529.467 | 3563.667 | 2520.8 | 1562.467 | 15/0/0 |
-| grid_k40_dense_seed1 | Speed | 15 | 843.933 | 472.8 | 25.261 | 14.72 | 6560.6 | 3704.667 | 2556.067 | 1612.667 | 15/0/0 |
-| Circuit 1 - Coastal Loop | Balanced | 12 | 5.333 | 2.583 | 0.1 | 0.074 | 14.083 | 4.75 | 14.75 | 7.667 | 10/2/0 |
-| Circuit 1 - Coastal Loop | Speed | 12 | 4.75 | 2.5 | 0.092 | 0.073 | 11.333 | 4.667 | 12.5 | 7.667 | 10/2/0 |
-| Circuit 1 - Coastal Loop | Economy | 12 | 5.667 | 2.75 | 0.126 | 0.079 | 14.583 | 5.333 | 15.167 | 8.167 | 10/2/0 |
-| Circuit 1 - Coastal Loop | Safety | 12 | 6.917 | 3.75 | 0.129 | 0.089 | 20.0 | 8.917 | 19.667 | 11.167 | 10/2/0 |
-| C:\Users\Hafsa\Desktop\5th Semester\DAA Project\smart_racing\tracks\circuit2.json | Balanced | 42 | 22.048 | 12.643 | 0.309 | 0.25 | 50.857 | 29.167 | 48.667 | 30.19 | 40/2/0 |
-| C:\Users\Hafsa\Desktop\5th Semester\DAA Project\smart_racing\tracks\circuit2.json | Speed | 42 | 21.929 | 11.643 | 0.302 | 0.229 | 50.524 | 26.833 | 48.143 | 28.357 | 40/2/0 |
-| C:\Users\Hafsa\Desktop\5th Semester\DAA Project\smart_racing\tracks\circuit2.json | Economy | 42 | 22.0 | 12.333 | 0.314 | 0.222 | 50.786 | 28.429 | 48.81 | 29.714 | 40/2/0 |
-| C:\Users\Hafsa\Desktop\5th Semester\DAA Project\smart_racing\tracks\circuit2.json | Safety | 42 | 21.667 | 17.214 | 0.288 | 0.281 | 50.31 | 40.238 | 48.762 | 40.69 | 38/4/0 |
+| grid_k10_sparse_seed1 | Balanced | 15 | 49.333 | 40.867 | 0.525 | 0.555 | 109.8 | 91.933 | 105.4 | 89.0 | 14/1/0 |
+| grid_k10_sparse_seed1 | Speed | 15 | 49.867 | 41.4 | 0.563 | 0.543 | 111.133 | 93.067 | 106.0 | 89.6 | 14/1/0 |
+| grid_k10_medium_seed1 | Balanced | 15 | 48.8 | 28.667 | 0.708 | 0.47 | 176.2 | 103.267 | 122.6 | 81.8 | 15/0/0 |
+| grid_k10_medium_seed1 | Speed | 15 | 48.8 | 29.467 | 0.684 | 0.509 | 176.067 | 106.133 | 124.8 | 84.6 | 15/0/0 |
+| grid_k10_dense_seed1 | Balanced | 15 | 32.267 | 14.8 | 0.766 | 0.442 | 222.4 | 102.867 | 98.267 | 53.267 | 15/0/0 |
+| grid_k10_dense_seed1 | Speed | 15 | 32.733 | 15.667 | 0.797 | 0.502 | 225.2 | 109.2 | 99.667 | 56.533 | 15/0/0 |
+| grid_k16_sparse_seed1 | Balanced | 15 | 147.4 | 127.267 | 1.348 | 1.28 | 335.2 | 292.133 | 311.133 | 278.267 | 14/1/0 |
+| grid_k16_sparse_seed1 | Speed | 15 | 148.267 | 129.733 | 1.607 | 2.098 | 337.2 | 297.267 | 311.933 | 279.4 | 13/2/0 |
+| grid_k16_medium_seed1 | Balanced | 15 | 123.467 | 71.4 | 1.697 | 1.258 | 466.867 | 270.467 | 305.133 | 197.733 | 14/1/0 |
+| grid_k16_medium_seed1 | Speed | 15 | 119.467 | 70.867 | 1.642 | 1.138 | 451.667 | 268.333 | 293.6 | 193.4 | 14/1/0 |
+| grid_k16_dense_seed1 | Balanced | 15 | 113.4 | 56.4 | 3.231 | 1.825 | 839.4 | 425.733 | 349.467 | 199.933 | 15/0/0 |
+| grid_k16_dense_seed1 | Speed | 15 | 113.333 | 58.933 | 5.48 | 3.497 | 838.333 | 444.6 | 351.067 | 211.733 | 15/0/0 |
+| grid_k24_sparse_seed1 | Balanced | 15 | 290.533 | 238.4 | 5.675 | 4.925 | 675.4 | 555.133 | 615.667 | 511.533 | 15/0/0 |
+| grid_k24_sparse_seed1 | Speed | 15 | 292.867 | 244.533 | 4.619 | 4.826 | 681.467 | 570.133 | 620.333 | 526.333 | 15/0/0 |
+| grid_k24_medium_seed1 | Balanced | 15 | 309.133 | 172.4 | 8.118 | 5.323 | 1195.467 | 671.0 | 764.6 | 480.0 | 14/1/0 |
+| grid_k24_medium_seed1 | Speed | 15 | 307.467 | 177.867 | 8.005 | 5.577 | 1189.2 | 692.6 | 754.4 | 486.4 | 14/1/0 |
+| grid_k24_dense_seed1 | Balanced | 15 | 203.8 | 88.8 | 10.537 | 5.788 | 1552.6 | 682.867 | 624.133 | 315.533 | 15/0/0 |
+| grid_k24_dense_seed1 | Speed | 15 | 207.933 | 94.867 | 11.986 | 6.243 | 1583.867 | 727.2 | 647.667 | 333.067 | 15/0/0 |
+| grid_k32_sparse_seed1 | Balanced | 15 | 485.0 | 333.4 | 11.223 | 8.295 | 1132.2 | 789.867 | 1020.0 | 730.733 | 15/0/0 |
+| grid_k32_sparse_seed1 | Speed | 15 | 484.733 | 344.8 | 10.389 | 8.133 | 1131.667 | 814.933 | 1020.533 | 750.533 | 15/0/0 |
+| grid_k32_medium_seed1 | Balanced | 15 | 524.333 | 304.0 | 14.41 | 9.716 | 2042.867 | 1191.733 | 1292.533 | 849.867 | 14/1/0 |
+| grid_k32_medium_seed1 | Speed | 15 | 522.533 | 310.533 | 14.444 | 9.666 | 2036.0 | 1216.933 | 1285.0 | 860.733 | 14/1/0 |
+| grid_k32_dense_seed1 | Balanced | 15 | 478.733 | 229.0 | 23.017 | 12.988 | 3691.4 | 1791.267 | 1431.4 | 799.133 | 15/0/0 |
+| grid_k32_dense_seed1 | Speed | 15 | 475.6 | 230.667 | 22.617 | 12.987 | 3666.6 | 1805.2 | 1446.6 | 809.533 | 15/0/0 |
+| grid_k40_sparse_seed1 | Balanced | 15 | 645.867 | 517.0 | 11.926 | 11.205 | 1505.667 | 1208.933 | 1353.6 | 1108.933 | 15/0/0 |
+| grid_k40_sparse_seed1 | Speed | 15 | 645.533 | 522.2 | 11.252 | 10.596 | 1504.6 | 1220.933 | 1350.267 | 1113.8 | 15/0/0 |
+| grid_k40_medium_seed1 | Balanced | 15 | 729.733 | 449.133 | 20.449 | 14.839 | 2860.4 | 1765.333 | 1800.267 | 1235.467 | 14/1/0 |
+| grid_k40_medium_seed1 | Speed | 15 | 731.533 | 461.2 | 11.193 | 7.504 | 2867.267 | 1811.867 | 1792.6 | 1250.4 | 14/1/0 |
+| grid_k40_dense_seed1 | Balanced | 15 | 840.133 | 454.6 | 22.378 | 12.941 | 6529.467 | 3563.667 | 2520.8 | 1562.467 | 15/0/0 |
+| grid_k40_dense_seed1 | Speed | 15 | 843.933 | 472.8 | 26.108 | 16.379 | 6560.6 | 3704.667 | 2556.067 | 1612.667 | 15/0/0 |
+| Circuit 1 - Coastal Loop | Balanced | 12 | 5.333 | 2.583 | 0.118 | 0.076 | 14.083 | 4.75 | 14.75 | 7.667 | 10/2/0 |
+| Circuit 1 - Coastal Loop | Speed | 12 | 4.75 | 2.5 | 0.109 | 0.077 | 11.333 | 4.667 | 12.5 | 7.667 | 10/2/0 |
+| Circuit 1 - Coastal Loop | Economy | 12 | 5.667 | 2.75 | 0.131 | 0.095 | 14.583 | 5.333 | 15.167 | 8.167 | 10/2/0 |
+| Circuit 1 - Coastal Loop | Safety | 12 | 6.917 | 3.75 | 0.186 | 0.134 | 20.0 | 8.917 | 19.667 | 11.167 | 10/2/0 |
+| C:\Users\Hafsa\Desktop\5th Semester\DAA Project\smart_racing\tracks\circuit2.json | Balanced | 42 | 22.048 | 12.643 | 0.287 | 0.242 | 50.857 | 29.167 | 48.667 | 30.19 | 40/2/0 |
+| C:\Users\Hafsa\Desktop\5th Semester\DAA Project\smart_racing\tracks\circuit2.json | Speed | 42 | 21.929 | 11.643 | 0.271 | 0.223 | 50.524 | 26.833 | 48.143 | 28.357 | 40/2/0 |
+| C:\Users\Hafsa\Desktop\5th Semester\DAA Project\smart_racing\tracks\circuit2.json | Economy | 42 | 22.0 | 12.333 | 0.37 | 0.276 | 50.786 | 28.429 | 48.81 | 29.714 | 40/2/0 |
+| C:\Users\Hafsa\Desktop\5th Semester\DAA Project\smart_racing\tracks\circuit2.json | Safety | 42 | 21.667 | 17.214 | 0.324 | 0.288 | 50.31 | 40.238 | 48.762 | 40.69 | 38/4/0 |
 
 Chart: exp2_expanded.png.  Raw data: exp2_raw.csv, summary: exp2_summary.csv.
 

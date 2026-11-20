@@ -1,0 +1,5 @@
+preset,roads,distance,time_s,fuel,cost_under_own_preset
+Balanced,17,2626.6,75.5,152.7,5.1115
+Speed,17,2654.7,57.5,172.5,4.0144
+Economy,17,2626.6,75.5,152.7,5.9596
+Safety,23,3968.2,146.5,166.9,3.3261
