@@ -2,7 +2,7 @@ import os, sys, tempfile, unittest
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, "experiments"))
-import challenge2_presets as c2
+import challenge2_presets as c2 # type: ignore
 from src.core.track_io import load_track
 from src.core import constants as K
 
