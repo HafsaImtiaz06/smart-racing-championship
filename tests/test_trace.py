@@ -3,7 +3,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "experiments"))
 from src.core.track_io import load_track
 from src.routing.api import bfs_path, dijkstra, astar, dfs_order
-import common
+import common  # type: ignore
 
 CIRCUIT = os.path.join(os.path.dirname(__file__), "..", "tracks", "circuit1.json")
 TINY = os.path.join(os.path.dirname(__file__), "data", "tiny.json")
