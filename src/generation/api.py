@@ -1,18 +1,7 @@
-"""PERSON B. CONTRACT (frozen). Uses A's routing.api.reachable_from / bfs_path for validation."""
-from ..core.graph import Graph
-
-
-def mst_backbone(points: list, candidate_edges: list, algo: str = "kruskal") -> list:
-    """Undirected MST over a CONNECTED candidate graph (else raise ValueError). Returns chosen edges."""
-    raise NotImplementedError
-
-
-def generate_track(seed: int, n_checkpoints: int = 10, max_attempts: int = 50) -> tuple:
-    """Returns (Graph or None, log: list[str]). log records rejected candidates and the reason."""
-    raise NotImplementedError
-
-
-def validate_track(g: Graph) -> list:
-    """Return list of problems (empty = valid): ordered checkpoint reachability, lap return, >=2 alt routes,
-    >=10 checkpoints, >=2 shortcuts, a cycle, a dead end, feasible fuel plan, geometry."""
-    raise NotImplementedError
+"""PERSON B. CONTRACT (frozen). Uses A's routing.api.reachable_from / bfs_path for validation.
+mst_backbone(points, candidate_edges, algo="kruskal") -> chosen edges (ValueError if candidate graph is disconnected)
+generate_track(seed, n_checkpoints=10, max_attempts=50) -> (Graph or None, log: list[str])   [optional params=, trace=]
+validate_track(g) -> list of problems (empty = valid)
+export_extras(g) -> dict for core.track_io.save_track(extra=...): lap_boundary, main_route, fixed_detour"""
+from .mst import mst_backbone
+from .track import generate_track, validate_track, export_extras
