@@ -4,7 +4,7 @@
 Measure runtime, visited vertices and examined edges of BFS and DFS on sparse, medium and dense road networks of growing size, verify correctness, and compare the observed growth with the theoretical O(V+E).
 
 ## Environment
-Date: 2026-11-20 15:42 | Python 3.13.15 (CPython) | OS: Windows-11-10.0.26300-SP0 | CPU: Intel64 Family 6 Model 142 Stepping 12, GenuineIntel, AMD64, 8 logical cores
+Date: 2026-11-21 17:26 | Python 3.13.15 (CPython) | OS: Windows-11-10.0.26300-SP0 | CPU: Intel64 Family 6 Model 142 Stepping 12, GenuineIntel, AMD64, 8 logical cores
 
 Timing includes the data structures each call allocates (visited set, queue/stack, order list). It excludes building the graph, rendering and file I/O. Correctness checks run separately, never inside a timed call.
 
@@ -23,60 +23,60 @@ runtime (ms), visited vertices, examined edges (directed arcs looked at), micros
 ## Results
 | graph | V | E | algorithm | mean ms | median ms | stdev ms | visited | examined | us per (V+E) |
 |---|---|---|---|---|---|---|---|---|---|
-| sparse | 100 | 111 | bfs_traverse | 0.1938 | 0.1825 | 0.0249 | 100 | 222 | 0.9184 |
-| sparse | 100 | 111 | dfs_traverse | 0.2413 | 0.2321 | 0.0193 | 100 | 222 | 1.1437 |
-| sparse | 100 | 111 | dfs_analysis_full | 0.4716 | 0.4461 | 0.0861 | 100 | 222 | 2.235 |
-| medium | 100 | 180 | bfs_traverse | 0.1612 | 0.1577 | 0.027 | 100 | 360 | 0.5757 |
-| medium | 100 | 180 | dfs_traverse | 0.3857 | 0.3213 | 0.1263 | 100 | 360 | 1.3774 |
-| medium | 100 | 180 | dfs_analysis_full | 0.6891 | 0.6937 | 0.1485 | 100 | 360 | 2.4612 |
-| dense | 100 | 342 | bfs_traverse | 0.3296 | 0.2883 | 0.0963 | 100 | 684 | 0.7458 |
-| dense | 100 | 342 | dfs_traverse | 1.0195 | 0.992 | 0.0913 | 100 | 684 | 2.3066 |
-| dense | 100 | 342 | dfs_analysis_full | 1.0155 | 0.9702 | 0.2092 | 100 | 684 | 2.2975 |
-| sparse | 256 | 288 | bfs_traverse | 0.5653 | 0.533 | 0.1331 | 256 | 576 | 1.0392 |
-| sparse | 256 | 288 | dfs_traverse | 0.8421 | 0.7801 | 0.1811 | 256 | 576 | 1.548 |
-| sparse | 256 | 288 | dfs_analysis_full | 1.3264 | 1.2625 | 0.2677 | 256 | 576 | 2.4382 |
-| medium | 256 | 480 | bfs_traverse | 0.4054 | 0.4076 | 0.0156 | 256 | 960 | 0.5509 |
-| medium | 256 | 480 | dfs_traverse | 1.3481 | 1.1002 | 0.3977 | 256 | 960 | 1.8317 |
-| medium | 256 | 480 | dfs_analysis_full | 1.7286 | 1.7248 | 0.2923 | 256 | 960 | 2.3486 |
-| dense | 256 | 930 | bfs_traverse | 1.1101 | 1.2567 | 0.2387 | 256 | 1860 | 0.936 |
-| dense | 256 | 930 | dfs_traverse | 3.1725 | 2.2065 | 2.4916 | 256 | 1860 | 2.675 |
-| dense | 256 | 930 | dfs_analysis_full | 2.5674 | 2.488 | 0.3955 | 256 | 1860 | 2.1648 |
-| sparse | 576 | 654 | bfs_traverse | 0.8677 | 0.837 | 0.2095 | 576 | 1308 | 0.7055 |
-| sparse | 576 | 654 | dfs_traverse | 2.2739 | 2.0909 | 0.5219 | 576 | 1308 | 1.8487 |
-| sparse | 576 | 654 | dfs_analysis_full | 3.0462 | 2.9258 | 0.3199 | 576 | 1308 | 2.4766 |
-| medium | 576 | 1104 | bfs_traverse | 1.1387 | 1.04 | 0.2 | 576 | 2208 | 0.6778 |
-| medium | 576 | 1104 | dfs_traverse | 2.6335 | 2.6373 | 0.4708 | 576 | 2208 | 1.5676 |
-| medium | 576 | 1104 | dfs_analysis_full | 6.7237 | 5.8273 | 3.2874 | 576 | 2208 | 4.0022 |
-| dense | 576 | 2162 | bfs_traverse | 2.4481 | 2.3268 | 0.5552 | 576 | 4324 | 0.8941 |
-| dense | 576 | 2162 | dfs_traverse | 3.9146 | 3.9442 | 0.1582 | 576 | 4324 | 1.4297 |
-| dense | 576 | 2162 | dfs_analysis_full | 7.311 | 6.9341 | 1.0053 | 576 | 4324 | 2.6702 |
-| sparse | 1024 | 1167 | bfs_traverse | 1.2758 | 1.2515 | 0.0569 | 1024 | 2334 | 0.5823 |
-| sparse | 1024 | 1167 | dfs_traverse | 4.2134 | 3.2017 | 2.4802 | 1024 | 2334 | 1.923 |
-| sparse | 1024 | 1167 | dfs_analysis_full | 5.4276 | 5.4249 | 0.2374 | 1024 | 2334 | 2.4772 |
-| medium | 1024 | 1984 | bfs_traverse | 1.953 | 1.8795 | 0.2794 | 1024 | 3968 | 0.6493 |
-| medium | 1024 | 1984 | dfs_traverse | 4.4426 | 4.3244 | 0.4629 | 1024 | 3968 | 1.4769 |
-| medium | 1024 | 1984 | dfs_analysis_full | 8.2578 | 7.6475 | 2.2819 | 1024 | 3968 | 2.7453 |
-| dense | 1024 | 3906 | bfs_traverse | 6.0726 | 5.6173 | 2.9312 | 1024 | 7812 | 1.2318 |
-| dense | 1024 | 3906 | dfs_traverse | 8.5316 | 8.741 | 1.1809 | 1024 | 7812 | 1.7306 |
-| dense | 1024 | 3906 | dfs_analysis_full | 18.9357 | 18.9679 | 2.8084 | 1024 | 7812 | 3.8409 |
-| sparse | 1600 | 1827 | bfs_traverse | 13.3021 | 9.4001 | 10.5073 | 1600 | 3654 | 3.8816 |
-| sparse | 1600 | 1827 | dfs_traverse | 59.1196 | 29.3146 | 53.5385 | 1600 | 3654 | 17.2511 |
-| sparse | 1600 | 1827 | dfs_analysis_full | 54.1067 | 54.0058 | 14.4281 | 1600 | 3654 | 15.7884 |
-| medium | 1600 | 3120 | bfs_traverse | 11.4966 | 12.5489 | 2.3503 | 1600 | 6240 | 2.4357 |
-| medium | 1600 | 3120 | dfs_traverse | 32.1731 | 31.2712 | 5.5109 | 1600 | 6240 | 6.8163 |
-| medium | 1600 | 3120 | dfs_analysis_full | 47.8261 | 46.07 | 11.2229 | 1600 | 6240 | 10.1327 |
-| dense | 1600 | 6162 | bfs_traverse | 15.4375 | 14.2673 | 3.6029 | 1600 | 12324 | 1.9889 |
-| dense | 1600 | 6162 | dfs_traverse | 28.3181 | 28.3215 | 3.2744 | 1600 | 12324 | 3.6483 |
-| dense | 1600 | 6162 | dfs_analysis_full | 68.7347 | 63.8216 | 13.6196 | 1600 | 12324 | 8.8553 |
-| sparse | 3136 | 3588 | bfs_traverse | 24.1732 | 18.6733 | 9.9178 | 3136 | 7176 | 3.5951 |
-| sparse | 3136 | 3588 | dfs_traverse | 30.8029 | 27.1782 | 8.2703 | 3136 | 7176 | 4.581 |
-| sparse | 3136 | 3588 | dfs_analysis_full | 48.8051 | 44.8456 | 20.4108 | 3136 | 7176 | 7.2583 |
-| medium | 3136 | 6160 | bfs_traverse | 8.7351 | 8.5409 | 1.2663 | 3136 | 12320 | 0.9397 |
-| medium | 3136 | 6160 | dfs_traverse | 22.2856 | 22.8304 | 4.756 | 3136 | 12320 | 2.3973 |
-| medium | 3136 | 6160 | dfs_analysis_full | 34.6624 | 34.7254 | 5.5598 | 3136 | 12320 | 3.7287 |
-| dense | 3136 | 12210 | bfs_traverse | 13.4766 | 13.0216 | 1.2195 | 3136 | 24420 | 0.8782 |
-| dense | 3136 | 12210 | dfs_traverse | 33.3696 | 30.5292 | 8.1157 | 3136 | 24420 | 2.1745 |
-| dense | 3136 | 12210 | dfs_analysis_full | 54.4698 | 53.2297 | 11.4075 | 3136 | 24420 | 3.5494 |
+| sparse | 100 | 111 | bfs_traverse | 0.0892 | 0.086 | 0.007 | 100 | 222 | 0.4226 |
+| sparse | 100 | 111 | dfs_traverse | 0.2096 | 0.2041 | 0.012 | 100 | 222 | 0.9934 |
+| sparse | 100 | 111 | dfs_analysis_full | 0.3787 | 0.352 | 0.079 | 100 | 222 | 1.7948 |
+| medium | 100 | 180 | bfs_traverse | 0.2519 | 0.204 | 0.0825 | 100 | 360 | 0.8996 |
+| medium | 100 | 180 | dfs_traverse | 0.2609 | 0.2535 | 0.0149 | 100 | 360 | 0.9316 |
+| medium | 100 | 180 | dfs_analysis_full | 0.4323 | 0.4233 | 0.0287 | 100 | 360 | 1.5439 |
+| dense | 100 | 342 | bfs_traverse | 0.326 | 0.3011 | 0.1201 | 100 | 684 | 0.7375 |
+| dense | 100 | 342 | dfs_traverse | 0.404 | 0.3957 | 0.0198 | 100 | 684 | 0.914 |
+| dense | 100 | 342 | dfs_analysis_full | 0.7823 | 0.7393 | 0.1028 | 100 | 684 | 1.77 |
+| sparse | 256 | 288 | bfs_traverse | 0.256 | 0.2415 | 0.0311 | 256 | 576 | 0.4706 |
+| sparse | 256 | 288 | dfs_traverse | 1.0861 | 1.0437 | 0.1391 | 256 | 576 | 1.9965 |
+| sparse | 256 | 288 | dfs_analysis_full | 1.2078 | 1.2207 | 0.3713 | 256 | 576 | 2.2202 |
+| medium | 256 | 480 | bfs_traverse | 0.3065 | 0.3039 | 0.0124 | 256 | 960 | 0.4165 |
+| medium | 256 | 480 | dfs_traverse | 0.729 | 0.6854 | 0.1195 | 256 | 960 | 0.9904 |
+| medium | 256 | 480 | dfs_analysis_full | 1.6719 | 1.4062 | 0.4504 | 256 | 960 | 2.2716 |
+| dense | 256 | 930 | bfs_traverse | 0.5113 | 0.5112 | 0.0216 | 256 | 1860 | 0.4311 |
+| dense | 256 | 930 | dfs_traverse | 1.8368 | 1.9116 | 0.3064 | 256 | 1860 | 1.5488 |
+| dense | 256 | 930 | dfs_analysis_full | 2.0076 | 1.8521 | 0.4074 | 256 | 1860 | 1.6927 |
+| sparse | 576 | 654 | bfs_traverse | 0.5563 | 0.5473 | 0.0226 | 576 | 1308 | 0.4523 |
+| sparse | 576 | 654 | dfs_traverse | 1.51 | 1.3751 | 0.2753 | 576 | 1308 | 1.2277 |
+| sparse | 576 | 654 | dfs_analysis_full | 4.4039 | 4.3817 | 0.2011 | 576 | 1308 | 3.5804 |
+| medium | 576 | 1104 | bfs_traverse | 0.8768 | 0.8074 | 0.2353 | 576 | 2208 | 0.5219 |
+| medium | 576 | 1104 | dfs_traverse | 3.1673 | 3.1281 | 0.1762 | 576 | 2208 | 1.8853 |
+| medium | 576 | 1104 | dfs_analysis_full | 3.4503 | 3.1122 | 0.95 | 576 | 2208 | 2.0538 |
+| dense | 576 | 2162 | bfs_traverse | 2.1435 | 2.5188 | 0.6359 | 576 | 4324 | 0.7829 |
+| dense | 576 | 2162 | dfs_traverse | 3.7309 | 3.0497 | 1.384 | 576 | 4324 | 1.3626 |
+| dense | 576 | 2162 | dfs_analysis_full | 8.2123 | 9.3034 | 2.2754 | 576 | 4324 | 2.9994 |
+| sparse | 1024 | 1167 | bfs_traverse | 1.0215 | 0.9875 | 0.1023 | 1024 | 2334 | 0.4662 |
+| sparse | 1024 | 1167 | dfs_traverse | 2.6733 | 2.6538 | 0.3504 | 1024 | 2334 | 1.2201 |
+| sparse | 1024 | 1167 | dfs_analysis_full | 4.081 | 3.8135 | 0.5699 | 1024 | 2334 | 1.8626 |
+| medium | 1024 | 1984 | bfs_traverse | 1.8517 | 1.6939 | 0.4326 | 1024 | 3968 | 0.6156 |
+| medium | 1024 | 1984 | dfs_traverse | 4.2549 | 3.8732 | 0.8656 | 1024 | 3968 | 1.4145 |
+| medium | 1024 | 1984 | dfs_analysis_full | 6.1514 | 6.2958 | 0.4485 | 1024 | 3968 | 2.045 |
+| dense | 1024 | 3906 | bfs_traverse | 2.7233 | 2.4729 | 0.5745 | 1024 | 7812 | 0.5524 |
+| dense | 1024 | 3906 | dfs_traverse | 6.0744 | 6.1752 | 0.6721 | 1024 | 7812 | 1.2321 |
+| dense | 1024 | 3906 | dfs_analysis_full | 9.7479 | 9.9634 | 0.412 | 1024 | 7812 | 1.9773 |
+| sparse | 1600 | 1827 | bfs_traverse | 1.6618 | 1.5901 | 0.147 | 1600 | 3654 | 0.4849 |
+| sparse | 1600 | 1827 | dfs_traverse | 4.0805 | 3.8048 | 0.5605 | 1600 | 3654 | 1.1907 |
+| sparse | 1600 | 1827 | dfs_analysis_full | 6.9534 | 6.9581 | 0.548 | 1600 | 3654 | 2.029 |
+| medium | 1600 | 3120 | bfs_traverse | 2.3311 | 2.1788 | 0.2673 | 1600 | 6240 | 0.4939 |
+| medium | 1600 | 3120 | dfs_traverse | 5.194 | 4.9944 | 0.4276 | 1600 | 6240 | 1.1004 |
+| medium | 1600 | 3120 | dfs_analysis_full | 8.819 | 8.6764 | 0.4976 | 1600 | 6240 | 1.8684 |
+| dense | 1600 | 6162 | bfs_traverse | 4.2974 | 4.2806 | 0.7231 | 1600 | 12324 | 0.5537 |
+| dense | 1600 | 6162 | dfs_traverse | 12.5511 | 9.8543 | 6.538 | 1600 | 12324 | 1.617 |
+| dense | 1600 | 6162 | dfs_analysis_full | 16.4323 | 15.7274 | 1.4829 | 1600 | 12324 | 2.117 |
+| sparse | 3136 | 3588 | bfs_traverse | 6.0199 | 5.6957 | 1.7531 | 3136 | 7176 | 0.8953 |
+| sparse | 3136 | 3588 | dfs_traverse | 8.1825 | 8.0744 | 0.7857 | 3136 | 7176 | 1.2169 |
+| sparse | 3136 | 3588 | dfs_analysis_full | 13.6673 | 13.6624 | 0.7333 | 3136 | 7176 | 2.0326 |
+| medium | 3136 | 6160 | bfs_traverse | 5.9998 | 5.6764 | 1.4096 | 3136 | 12320 | 0.6454 |
+| medium | 3136 | 6160 | dfs_traverse | 12.847 | 11.6127 | 3.3165 | 3136 | 12320 | 1.382 |
+| medium | 3136 | 6160 | dfs_analysis_full | 19.2975 | 18.8315 | 1.498 | 3136 | 12320 | 2.0759 |
+| dense | 3136 | 12210 | bfs_traverse | 9.591 | 9.1418 | 1.7809 | 3136 | 24420 | 0.625 |
+| dense | 3136 | 12210 | dfs_traverse | 19.5223 | 19.7945 | 1.2363 | 3136 | 24420 | 1.2721 |
+| dense | 3136 | 12210 | dfs_analysis_full | 56.3839 | 41.1437 | 28.6919 | 3136 | 24420 | 3.6742 |
 
 Chart: exp1_runtime.png.  Raw data: exp1_raw.csv.
 
