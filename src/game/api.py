@@ -1,5 +1,6 @@
 """PERSON C. CONTRACT (frozen)."""
 from ..core.graph import Graph
+from .scoring import award_points      # implemented in scoring.py
 
 
 class RaceEngine:
@@ -9,8 +10,3 @@ class RaceEngine:
     def step(self, dt: float) -> None: raise NotImplementedError
     def is_finished(self) -> bool: raise NotImplementedError
     def results(self, race_id: int) -> list: raise NotImplementedError   # list[RaceResult]
-
-
-def award_points(results: list) -> list:
-    """Apply K.POINTS_TABLE and K.FASTEST_LAP_BONUS; DNF / time-limit unfinished get 0."""
-    raise NotImplementedError
